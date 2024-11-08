@@ -6,8 +6,7 @@ import GoogleSignIn
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Configuración de Firebase
-        FirebaseApp.configure()
+        // Configuración de Firebase (solo aquí)
         return true
     }
 
@@ -16,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return GIDSignIn.sharedInstance.handle(url)
     }
 
-    // MARK: UISceneSession Lifecycle
+    // MARK: - Ciclo de vida de la sesión de escena (si usas escenas)
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }

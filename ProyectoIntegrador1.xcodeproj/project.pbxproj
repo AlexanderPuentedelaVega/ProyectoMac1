@@ -23,6 +23,11 @@
 		EE478D7D2CDBF0AC00A91A18 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = EE478D7C2CDBF0AC00A91A18 /* FirebaseDatabase */; };
 		EE478D7F2CDBF0AC00A91A18 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = EE478D7E2CDBF0AC00A91A18 /* FirebaseStorage */; };
 		EE478D832CDC044E00A91A18 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE478D822CDC044E00A91A18 /* GoogleService-Info.plist */; };
+		EEA13FB72CDE9A3D003096E4 /* ListaProductosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA13FB62CDE9A3D003096E4 /* ListaProductosViewController.swift */; };
+		EEA13FB92CDE9D36003096E4 /* Productos.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA13FB82CDE9D36003096E4 /* Productos.swift */; };
+		EEA13FBB2CDE9E97003096E4 /* ListaCategoriasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA13FBA2CDE9E97003096E4 /* ListaCategoriasViewController.swift */; };
+		EEA13FBD2CDEA26D003096E4 /* AgregarCategoriaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA13FBC2CDEA26D003096E4 /* AgregarCategoriaViewController.swift */; };
+		EEA13FBF2CDEAB81003096E4 /* AgregarProductosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA13FBE2CDEAB81003096E4 /* AgregarProductosViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +43,11 @@
 		EE478D672CDBEE9E00A91A18 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EE478D692CDBEE9E00A91A18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE478D822CDC044E00A91A18 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EEA13FB62CDE9A3D003096E4 /* ListaProductosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListaProductosViewController.swift; sourceTree = "<group>"; };
+		EEA13FB82CDE9D36003096E4 /* Productos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Productos.swift; sourceTree = "<group>"; };
+		EEA13FBA2CDE9E97003096E4 /* ListaCategoriasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListaCategoriasViewController.swift; sourceTree = "<group>"; };
+		EEA13FBC2CDEA26D003096E4 /* AgregarCategoriaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgregarCategoriaViewController.swift; sourceTree = "<group>"; };
+		EEA13FBE2CDEAB81003096E4 /* AgregarProductosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgregarProductosViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +116,11 @@
 				EE478D642CDBEE9E00A91A18 /* Assets.xcassets */,
 				EE478D662CDBEE9E00A91A18 /* LaunchScreen.storyboard */,
 				EE478D692CDBEE9E00A91A18 /* Info.plist */,
+				EEA13FB62CDE9A3D003096E4 /* ListaProductosViewController.swift */,
+				EEA13FB82CDE9D36003096E4 /* Productos.swift */,
+				EEA13FBA2CDE9E97003096E4 /* ListaCategoriasViewController.swift */,
+				EEA13FBC2CDEA26D003096E4 /* AgregarCategoriaViewController.swift */,
+				EEA13FBE2CDEAB81003096E4 /* AgregarProductosViewController.swift */,
 			);
 			path = ProyectoIntegrador1;
 			sourceTree = "<group>";
@@ -239,8 +254,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEA13FB92CDE9D36003096E4 /* Productos.swift in Sources */,
+				EEA13FBD2CDEA26D003096E4 /* AgregarCategoriaViewController.swift in Sources */,
+				EEA13FBF2CDEAB81003096E4 /* AgregarProductosViewController.swift in Sources */,
+				EEA13FB72CDE9A3D003096E4 /* ListaProductosViewController.swift in Sources */,
 				EE478D602CDBEE9D00A91A18 /* ViewController.swift in Sources */,
 				EE478D5C2CDBEE9D00A91A18 /* AppDelegate.swift in Sources */,
+				EEA13FBB2CDE9E97003096E4 /* ListaCategoriasViewController.swift in Sources */,
 				EE478D5E2CDBEE9D00A91A18 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
