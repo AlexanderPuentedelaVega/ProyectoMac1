@@ -15,12 +15,12 @@ class AgregarProductosViewController: UIViewController, UIImagePickerControllerD
 
     // MARK: - Variables
     var ref: DatabaseReference!
-    var categoria: Categoria?
+    var categoria: Categoria? // Definimos la variab    le para la categoría seleccionada
     var selectedImage: UIImage? // Imagen seleccionada por el usuario
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print(categoria?.id)
         ref = Database.database().reference()
         registrarProductoButton.layer.cornerRadius = 10
         agregarImagenButton.layer.cornerRadius = 10
@@ -60,26 +60,27 @@ class AgregarProductosViewController: UIViewController, UIImagePickerControllerD
             uploadImageToFirebaseStorage(image) { [weak self] imageURL in
                 guard let self = self else { return }
 
+                // Si no se ha seleccionado una categoría, mostramos un mensaje de error
+                guard let categoriaID = self.categoria?.id else {
+                    self.showAlert(message: "No se ha seleccionado una categoría.")
+                    return
+                }
+
                 // Crear un producto con los datos
                 let producto = [
                     "nombre": nombre,
                     "descripcion": descripcion,
                     "precio": precio,
                     "stock": stock,
-                    "imagenURL": imageURL,  // Usamos la URL de la imagen subida
-                    "categoriaID": self.categoria?.id ?? ""
-                ] as [String: Any]
-
-                // Guardar el producto en Firebase
-                if let categoriaID = self.categoria?.id {
-                    let productoRef = self.ref.child("categorias").child(categoriaID).child("productos").childByAutoId()
-                    productoRef.setValue(producto) { error, _ in
-                        if let error = error {
-                            self.showAlert(message: "Error al registrar el producto: \(error.localizedDescription)")
-                        } else {
-                            self.showAlert(message: "Producto registrado exitosamente!")
-                            self.limpiarCampos()
-                        }
+                    "imagenURL": imageURL
+                ] as [String : Any]
+                
+                // Agregar el producto a la categoría seleccionada en Firebase
+                self.ref.child("categorias").child(categoriaID).child("productos").childByAutoId().setValue(producto) { error, _ in
+                    if let error = error {
+                        self.showAlert(message: "Error al registrar el producto: \(error.localizedDescription)")
+                    } else {
+                        self.showAlert(message: "Producto registrado exitosamente.")
                     }
                 }
             }
@@ -89,22 +90,20 @@ class AgregarProductosViewController: UIViewController, UIImagePickerControllerD
     // MARK: - Subir imagen a Firebase Storage
     func uploadImageToFirebaseStorage(_ image: UIImage, completion: @escaping (String) -> Void) {
         let storageRef = Storage.storage().reference().child("productos").child(UUID().uuidString + ".jpg")
-        
-        if let imageData = image.jpegData(compressionQuality: 0.8) {
+        if let imageData = image.jpegData(compressionQuality: 0.75) {
             storageRef.putData(imageData, metadata: nil) { metadata, error in
                 if let error = error {
-                    print("Error al subir la imagen: \(error.localizedDescription)")  // Agregar depuración
-                    self.showAlert(message: "Error al subir la imagen: \(error.localizedDescription)")
+                    print("Error al subir imagen: \(error.localizedDescription)")
                     return
                 }
-                
-                // Si la imagen se sube correctamente, intentamos obtener la URL de descarga
+
                 storageRef.downloadURL { url, error in
                     if let error = error {
-                        print("Error al obtener la URL de la imagen: \(error.localizedDescription)")  // Depuración adicional
-                        self.showAlert(message: "Error al obtener la URL de la imagen: \(error.localizedDescription)")
-                    } else if let imageURL = url?.absoluteString {
-                        print("URL de la imagen subida: \(imageURL)")  // Verificar la URL obtenida
+                        print("Error al obtener la URL de descarga: \(error.localizedDescription)")
+                        return
+                    }
+
+                    if let imageURL = url?.absoluteString {
                         completion(imageURL)
                     }
                 }
@@ -112,21 +111,10 @@ class AgregarProductosViewController: UIViewController, UIImagePickerControllerD
         }
     }
 
-
-    // MARK: - Función para mostrar alerta
+    // MARK: - Mostrar alerta
     func showAlert(message: String) {
         let alert = UIAlertController(title: "Información", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
-    }
-
-    // MARK: - Limpiar los campos de texto
-    func limpiarCampos() {
-        nombreProductoTextField.text = ""
-        descripcionProductoTextField.text = ""
-        precioProductoTextField.text = ""
-        stockProductoTextField.text = ""
-        imageView.image = nil
-        selectedImage = nil
+        alert.addAction(UIAlertAction(title: "Aceptar", style: .default))
+        present(alert, animated: true)
     }
 }

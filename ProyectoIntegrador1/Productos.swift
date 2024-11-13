@@ -40,6 +40,4 @@ struct Producto {
     let precio: Double
     let stock: Int
     let imagenURL: String
-    let categoriaID: String
 }
-
