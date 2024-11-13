@@ -14,9 +14,6 @@ class ListaProductosViewController: UIViewController, UITableViewDelegate, UITab
     var productosFiltrados: [Producto] = [] // Array para almacenar productos filtrados
     var ref: DatabaseReference!
     
-    // Acción para el botón de búsqueda
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
@@ -104,10 +101,76 @@ class ListaProductosViewController: UIViewController, UITableViewDelegate, UITab
         
         return cell
     }
+
+    // Habilitar el estilo de edición para eliminar productos
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete // Esto habilita el botón de borrar
+    }
+
+    // Acción para eliminar un producto
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Mostrar alerta de confirmación
+            let producto = productosFiltrados[indexPath.row]
+            let alertController = UIAlertController(title: "Eliminar Producto", message: "¿Estás seguro de que deseas eliminar el producto?", preferredStyle: .alert)
+            
+            // Acción para eliminar el producto
+            let deleteAction = UIAlertAction(title: "Eliminar", style: .destructive) { [weak self] _ in
+                self?.eliminarProducto(producto: producto)
+            }
+            alertController.addAction(deleteAction)
+            
+            // Acción para cancelar
+            let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            
+            // Mostrar la alerta
+            present(alertController, animated: true, completion: nil)
+        }
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let productoSeleccionado = productosFiltrados[indexPath.row]
+        performSegue(withIdentifier: "editarProductoSegue", sender: productoSeleccionado)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
     
+    // Función para eliminar un producto de Firebase
+    func eliminarProducto(producto: Producto) {
+        ref.child("categorias").child(categoria?.id ?? "").child("productos").child(producto.id).removeValue { error, _ in
+            if let error = error {
+                print("Error al eliminar el producto: \(error.localizedDescription)")
+            } else {
+                // Actualizar la lista de productos después de eliminarlo
+                if let index = self.productosFiltrados.firstIndex(where: { $0.id == producto.id }) {
+                    self.productosFiltrados.remove(at: index)
+                    self.productos.remove(at: index)
+                    self.tableView.reloadData()
+                }
+            }
+        }
+    }
+
+    @IBAction func AgregarProducto(_ sender: Any) {
+        // Verifica si 'categoria' está configurada
+        if let categoria = categoria {
+            performSegue(withIdentifier: "agregarProductoSegue", sender: categoria)
+        } else {
+            print("Error: No se ha seleccionado una categoría.")
+        }
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "agregarProductoSegue" {
             if let destinoVC = segue.destination as? AgregarProductosViewController {
+                var categoriaSeleccionada = sender as? Categoria
+                destinoVC.categoria = categoriaSeleccionada
+                
+            }
+        } else if segue.identifier == "editarProductoSegue" {
+            if let destinoVC = segue.destination as? EditarProductoViewController,
+               var productoSeleccionado = sender as? Producto {
+                // Pasa el producto al controlador de edición
+                destinoVC.producto = productoSeleccionado
                 var categoriaSeleccionada = sender as? Categoria
                 destinoVC.categoria = categoriaSeleccionada
             }

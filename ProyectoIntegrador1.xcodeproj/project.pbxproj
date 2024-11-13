@@ -28,6 +28,7 @@
 		EEA13FBD2CDEA26D003096E4 /* AgregarCategoriaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA13FBC2CDEA26D003096E4 /* AgregarCategoriaViewController.swift */; };
 		EEA13FBF2CDEAB81003096E4 /* AgregarProductosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA13FBE2CDEAB81003096E4 /* AgregarProductosViewController.swift */; };
 		EEA924A72CE2B4780004F29D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEA924A62CE2B4780004F29D /* GoogleService-Info.plist */; };
+		EEB0CFA52CE533F2004442F7 /* EditarProductoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB0CFA42CE533F2004442F7 /* EditarProductoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		EEA13FBC2CDEA26D003096E4 /* AgregarCategoriaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgregarCategoriaViewController.swift; sourceTree = "<group>"; };
 		EEA13FBE2CDEAB81003096E4 /* AgregarProductosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgregarProductosViewController.swift; sourceTree = "<group>"; };
 		EEA924A62CE2B4780004F29D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EEB0CFA42CE533F2004442F7 /* EditarProductoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditarProductoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 				EEA13FBA2CDE9E97003096E4 /* ListaCategoriasViewController.swift */,
 				EEA13FBC2CDEA26D003096E4 /* AgregarCategoriaViewController.swift */,
 				EEA13FBE2CDEAB81003096E4 /* AgregarProductosViewController.swift */,
+				EEB0CFA42CE533F2004442F7 /* EditarProductoViewController.swift */,
 			);
 			path = ProyectoIntegrador1;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				EEA13FB72CDE9A3D003096E4 /* ListaProductosViewController.swift in Sources */,
 				EE478D602CDBEE9D00A91A18 /* ViewController.swift in Sources */,
 				EE478D5C2CDBEE9D00A91A18 /* AppDelegate.swift in Sources */,
+				EEB0CFA52CE533F2004442F7 /* EditarProductoViewController.swift in Sources */,
 				EEA13FBB2CDE9E97003096E4 /* ListaCategoriasViewController.swift in Sources */,
 				EE478D5E2CDBEE9D00A91A18 /* SceneDelegate.swift in Sources */,
 			);
